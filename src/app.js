@@ -1,29 +1,25 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-require('dotenv').config();
+const database = require('./config/database');
+const notFound = require('./middlewares/notFound');
+const handleErrors = require('./middlewares/handleErrors');
 const routes = require('./routes');
 
-const app = express();
+const configureExpress = () => {
+  const app = express();
 
-app.use(helmet());
+  app.use(helmet());
 
-app.use(bodyParser.json());
+  app.use(bodyParser.json());
 
-app.use('/', routes);
+  app.use('/', routes);
 
-// not found
-app.use((req, res, next) => {
-  const err = new Error('not found');
-  err.status = 404;
-  next(err);
-});
+  app.use(notFound);
+  app.use(handleErrors);
 
-// handle errors
-app.use((err, req, res) => {
-  res.status(err.status || 500);
-  const data = { message: err.message };
-  res.json(data);
-});
+  return app;
+};
 
-module.exports = app;
+module.exports = () => database.connect().then(configureExpress);

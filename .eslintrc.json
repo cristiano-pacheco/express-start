@@ -17,6 +17,8 @@
     "beforeEach": true,
     "afterEach": true,
     "before": true,
-    "after": true
+    "after": true,
+    "setupApp": true,
+    "supertest": true
   }
 }
