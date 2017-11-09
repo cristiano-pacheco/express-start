@@ -1,7 +1,7 @@
 describe('Route index', () => {
   before(() =>
     setupApp().then((app) => {
-      global.request = supertest(app);
+      request = supertest(app);
     }));
 
   describe('GET /', () => {
