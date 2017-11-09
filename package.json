@@ -10,7 +10,7 @@
     "test:acceptance":
       "NODE_ENV=test ./node_modules/.bin/mocha --exit --opts test/acceptance/mocha.opts test/acceptance/**/*_spec.js",
     "test:unit":
-      "NODE_ENV=test ./node_modules/.bin/mocha --exit --opts test/unit/mocha.opts test/unit/**/*_spec.js",
+      "NODE_ENV=test ./node_modules/.bin/mocha  --exit --opts test/unit/mocha.opts test/unit/**/*_spec.js",
     "lint": "./node_modules/.bin/eslint '**/*.js'",
     "lint:fix": "./node_modules/.bin/eslint '**/*.js' --fix"
   },

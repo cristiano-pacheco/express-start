@@ -1,8 +1,18 @@
+const mongoose = require('mongoose');
+
 describe('Route index', () => {
-  before(() =>
-    setupApp().then((app) => {
-      request = supertest(app);
-    }));
+  let request;
+
+  before((done) => {
+    setupApp()
+      .then((app) => {
+        request = supertest(app);
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  after(() => mongoose.disconnect());
 
   describe('GET /', () => {
     it('should return a json { ok: true }', () => {

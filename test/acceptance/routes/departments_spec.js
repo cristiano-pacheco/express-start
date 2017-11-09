@@ -1,13 +1,20 @@
+const mongoose = require('mongoose');
 const Department = require('../../../src/models/department');
 
 /* eslint-disable no-underscore-dangle */
 describe('Route departments', () => {
   let request;
 
-  before(() =>
-    setupApp().then((app) => {
-      request = supertest(app);
-    }));
+  before((done) => {
+    setupApp()
+      .then((app) => {
+        request = supertest(app);
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  after(() => mongoose.disconnect());
 
   const defaultId = '56cb91bdc3464f14678934ca';
 
